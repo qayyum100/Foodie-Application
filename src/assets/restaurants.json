@@ -1,3 +1,4 @@
+
 [
   {
     "id": "rest_1",
@@ -22,5 +23,29 @@
     "rating": 4.7,
     "description": "Fresh sushi and rolls",
     "image": "https://images.unsplash.com/photo-1546069901-eacef0df6022"
+  },
+  {
+    "id": "rest_4",
+    "name": "Burger Hub",
+    "cuisine": "American",
+    "rating": 4.3,
+    "description": "Juicy burgers and loaded fries",
+    "image": "https://images.unsplash.com/photo-1550547660-d9450f859349"
+  },
+  {
+    "id": "rest_5",
+    "name": "Green Bowl",
+    "cuisine": "Healthy",
+    "rating": 4.4,
+    "description": "Salads, smoothies & healthy bowls",
+    "image": "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe"
+  },
+  {
+    "id": "rest_6",
+    "name": "Dragon Wok",
+    "cuisine": "Chinese",
+    "rating": 4.2,
+    "description": "Indo-Chinese and street style noodles",
+    "image": "https://images.unsplash.com/photo-1585032226651-759b368d7246"
   }
 ]

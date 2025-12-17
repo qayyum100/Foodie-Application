@@ -3,12 +3,10 @@ import api from "../api/api";
 import { AuthContext } from "../Contexts/AuthContext"; // <-- use lowercase 'contexts'
 import "../styles/App.css";
 import { Link } from "react-router-dom";
-
 export default function RestaurantCard({ rest }) {
   const { token } = useContext(AuthContext);
   const [isFav, setIsFav] = useState(false);
   const [loading, setLoading] = useState(false);
-
   useEffect(() => {
     let mounted = true;
     const check = async () => {
@@ -23,35 +21,37 @@ export default function RestaurantCard({ rest }) {
     check();
     return () => (mounted = false);
   }, [rest.id, token]);
-
   const handleAdd = async () => {
     if (!token) return alert("Please log in to add favorites");
     setLoading(true);
     try {
-      await api.post("/api/favorite/add", { restaurantId: rest.id });
+      // await api.post("/api/favorite/add", { restaurantId: rest.id });
+      // setIsFav(true);
       setIsFav(true);
+      await api.post("/api/favorite/add", { restaurantId: rest.id });
     } catch (err) {
       console.error(err);
+      setIsFav(false);
       alert("Failed to add favorite");
     } finally {
       setLoading(false);
     }
   };
-
   const handleRemove = async () => {
     if (!token) return alert("Please log in to remove favorites");
     setLoading(true);
     try {
-      await api.delete(`/api/favorite/remove/${rest.id}`);
       setIsFav(false);
+      await api.delete(`/api/favorite/remove/${rest.id}`);
+      // setIsFav(false);
     } catch (err) {
       console.error(err);
+      setIsFav(true);
       alert("Failed to remove favorite");
     } finally {
       setLoading(false);
     }
   };
-
   return (
     <div className="card">
       <Link to={`/restaurant/${rest.id}`}>
@@ -59,12 +59,12 @@ export default function RestaurantCard({ rest }) {
       </Link>
       <div className="card-body">
         <h3>{rest.name}</h3>
-        <p>{rest.cuisine}</p>
-        <div className="card-actions">
+        <p className="meta">{rest.cuisine}</p>
+        <div style={{display:"flex", gap:8, marginTop:12}}>
           <Link to={`/restaurant/${rest.id}`} className="btn btn-sm">View</Link>
           {isFav ? (
             <button className="btn btn-sm danger" onClick={handleRemove} disabled={loading}>
-              ♥ Remove
+              ♥️ Remove
             </button>
           ) : (
             <button className="btn btn-sm" onClick={handleAdd} disabled={loading}>
@@ -76,6 +76,85 @@ export default function RestaurantCard({ rest }) {
     </div>
   );
 }
+
+// import React, { useContext, useEffect, useState } from "react";
+// import api from "../api/api";
+// import { AuthContext } from "../Contexts/AuthContext"; // <-- use lowercase 'contexts'
+// import "../styles/App.css";
+// import { Link } from "react-router-dom";
+
+// export default function RestaurantCard({ rest }) {
+//   const { token } = useContext(AuthContext);
+//   const [isFav, setIsFav] = useState(false);
+//   const [loading, setLoading] = useState(false);
+
+//   useEffect(() => {
+//     let mounted = true;
+//     const check = async () => {
+//       if (!token) return setIsFav(false);
+//       try {
+//         const res = await api.get(`/api/favorite/check/${rest.id}`);
+//         if (mounted) setIsFav(Boolean(res.data));
+//       } catch (err) {
+//         if (mounted) setIsFav(false);
+//       }
+//     };
+//     check();
+//     return () => (mounted = false);
+//   }, [rest.id, token]);
+
+//   const handleAdd = async () => {
+//     if (!token) return alert("Please log in to add favorites");
+//     setLoading(true);
+//     try {
+//       await api.post("/api/favorite/add", { restaurantId: rest.id });
+//       setIsFav(true);
+//     } catch (err) {
+//       console.error(err);
+//       alert("Failed to add favorite");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   const handleRemove = async () => {
+//     if (!token) return alert("Please log in to remove favorites");
+//     setLoading(true);
+//     try {
+//       await api.delete(`/api/favorite/remove/${rest.id}`);
+//       setIsFav(false);
+//     } catch (err) {
+//       console.error(err);
+//       alert("Failed to remove favorite");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   return (
+//     <div className="card">
+//       <Link to={`/restaurant/${rest.id}`}>
+//         <img src={rest.image || "https://via.placeholder.com/400x220"} alt={rest.name} />
+//       </Link>
+//       <div className="card-body">
+//         <h3>{rest.name}</h3>
+//         <p>{rest.cuisine}</p>
+//         <div className="card-actions">
+//           <Link to={`/restaurant/${rest.id}`} className="btn btn-sm">View</Link>
+//           {isFav ? (
+//             <button className="btn btn-sm danger" onClick={handleRemove} disabled={loading}>
+//               ♥ Remove
+//             </button>
+//           ) : (
+//             <button className="btn btn-sm" onClick={handleAdd} disabled={loading}>
+//               ♡ Add
+//             </button>
+//           )}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
 
 
 
