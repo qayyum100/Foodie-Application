@@ -5,7 +5,7 @@
     "name": "Spice Corner",
     "cuisine": "Indian",
     "rating": 4.5,
-    "description": "Homestyle Indian meals",
+    "description": "Authentic Indian thali with rich spices and homemade flavors.",
     "image": "https://st2.depositphotos.com/5653638/11520/i/950/depositphotos_115207682-stock-photo-indian-thali-indian-food-thali.jpg?utm_source=chatgpt.com"
   },
   {
@@ -13,7 +13,7 @@
     "name": "Little Italy",
     "cuisine": "Italian",
     "rating": 4.6,
-    "description": "Pastas, pizzas and more",
+    "description": "Fresh pasta dishes inspired by traditional Italian recipes.",
     "image": "https://images.unsplash.com/photo-1525755662778-989d0524087e"
   },
   {
