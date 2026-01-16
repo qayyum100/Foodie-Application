@@ -10,11 +10,15 @@ import RestaurantDetail from "./pages/RestaurantDetail";
 //import { AuthProvider } from "./contexts/AuthContext";
 import { AuthProvider } from "./Contexts/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { CartProvider } from "./Contexts/CartContext";
 import "./styles/App.css";
+import Cart from "./pages/Cart";
+
 
 function App() {
   return (
     <AuthProvider>
+       <CartProvider>
       <BrowserRouter>
         <Navbar />
         <Routes>
@@ -22,14 +26,18 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="/favorites" element={
             <ProtectedRoute>
               <Favorites />
             </ProtectedRoute>
           } />
+          
         </Routes>
       </BrowserRouter>
+      </CartProvider>
     </AuthProvider>
+
   );
 }
 
